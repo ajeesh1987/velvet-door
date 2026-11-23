@@ -28,6 +28,20 @@
         "location": "subreddit",
         "forUserType": "moderator",
         "endpoint": "/internal/menu/post-create"
+      },
+      {
+        "label": "Spike: test comment",
+        "description": "Day 2 permissions spike",
+        "location": "post",
+        "forUserType": "moderator",
+        "endpoint": "/internal/menu/spike-comment"
+      },
+      {
+        "label": "Spike: test flair",
+        "description": "Day 2 permissions spike",
+        "location": "post",
+        "forUserType": "moderator",
+        "endpoint": "/internal/menu/spike-flair"
       }
     ]
   },
