@@ -30,18 +30,25 @@
         "endpoint": "/internal/menu/post-create"
       },
       {
-        "label": "Spike: test comment",
-        "description": "Day 2 permissions spike",
+        "label": "Test: finish next day",
+        "description": "Streak test tool",
         "location": "post",
         "forUserType": "moderator",
-        "endpoint": "/internal/menu/spike-comment"
+        "endpoint": "/internal/menu/spike-finish"
       },
       {
-        "label": "Spike: test flair",
-        "description": "Day 2 permissions spike",
+        "label": "Test: skip a day",
+        "description": "Streak test tool",
         "location": "post",
         "forUserType": "moderator",
-        "endpoint": "/internal/menu/spike-flair"
+        "endpoint": "/internal/menu/spike-skip"
+      },
+      {
+        "label": "Test: reset streak",
+        "description": "Streak test tool",
+        "location": "post",
+        "forUserType": "moderator",
+        "endpoint": "/internal/menu/spike-reset"
       }
     ]
   },
