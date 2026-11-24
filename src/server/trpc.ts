@@ -1,9 +1,12 @@
 import { initTRPC } from '@trpc/server';
 import { transformer } from '../shared/transformer';
 import { Context } from './context';
-import { context, reddit } from '@devvit/web/server';
-import { countDecrement, countGet, countIncrement } from './core/count';
-import { z } from 'zod';
+import { context } from '@devvit/web/server';
+import { guestSchema, dayLabel, type Probe } from '../shared/door';
+import { utcDayIndex } from '../shared/streak';
+import { alreadyTested, decide } from '../shared/judge';
+import { loadProbes, saveProbes } from './core/door';
+import { doorForDay, startersFor } from './core/schedule';
 
 /**
  * Initialization of tRPC backend
@@ -21,43 +24,42 @@ export const router = t.router;
 export const publicProcedure = t.procedure;
 
 export const appRouter = t.router({
-  init: t.router({
-    get: publicProcedure.query(async () => {
-      const [count, username] = await Promise.all([
-        countGet(),
-        reddit.getCurrentUsername(),
-      ]);
-
+  door: t.router({
+    today: publicProcedure.query(async () => {
+      const day = utcDayIndex();
+      const door = doorForDay(day);
+      const starters = startersFor(door.entry.id);
+      const { userId } = context;
+      const probes = userId ? await loadProbes(door.number, userId) : [];
       return {
-        count,
-        postId: context.postId,
-        username,
+        number: door.number,
+        dateLabel: dayLabel(day),
+        difficulty: door.difficulty,
+        starters: [
+          { guest: starters.admit, admit: true },
+          { guest: starters.reject, admit: false },
+        ] satisfies Probe[],
+        probes,
       };
     }),
-  }),
-  counter: t.router({
-    increment: publicProcedure
-      .input(z.number().optional())
-      .mutation(async ({ input }) => {
-        const { postId } = context;
-        return {
-          count: await countIncrement(input),
-          postId,
-          type: 'increment',
-        };
-      }),
-    decrement: publicProcedure
-      .input(z.number().optional())
-      .mutation(async ({ input }) => {
-        const { postId } = context;
-        return {
-          count: await countDecrement(input),
-          postId,
-          type: 'decrement',
-        };
-      }),
-    get: publicProcedure.query(async () => {
-      return await countGet();
+    probe: publicProcedure.input(guestSchema).mutation(async ({ input }) => {
+      const door = doorForDay(utcDayIndex());
+      const starters = startersFor(door.entry.id);
+      const { userId } = context;
+      const mine = userId ? await loadProbes(door.number, userId) : [];
+      const known: Probe[] = [
+        { guest: starters.admit, admit: true },
+        { guest: starters.reject, admit: false },
+        ...mine,
+      ];
+      const seen = alreadyTested(known, input);
+      if (seen) return { admit: seen.admit, duplicate: true as const };
+
+      const admit = decide(door.entry.rule, input);
+      if (userId) {
+        await saveProbes(door.number, userId, [...mine, { guest: input, admit }]);
+      }
+      return { admit, duplicate: false as const };
     }),
   }),
 });
