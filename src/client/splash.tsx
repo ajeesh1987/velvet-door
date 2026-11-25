@@ -37,24 +37,28 @@ export const Splash = () => {
   const played = door ? door.probes.length : 0;
 
   return (
-    <div className="relative box-border h-screen min-h-[270px] bg-card px-6 pb-4 pt-4">
+    <div className="bg-card relative box-border h-screen min-h-[270px] px-6 pt-4 pb-4">
       <DecoFrame />
       <div className="relative flex h-full flex-col">
         <div className="grid grid-cols-[64px_1fr_64px] items-start">
           <span
             className={cn(
               'w-fit rounded-full border px-2.5 py-px text-[12px] font-medium capitalize shadow-[0_0_8px_currentColor]',
-              door ? BADGE[door.difficulty] : 'border-transparent text-transparent'
+              door
+                ? BADGE[door.difficulty]
+                : 'border-transparent text-transparent'
             )}
           >
             {door?.difficulty ?? 'easy'}
           </span>
           <div className="text-center">
-            <h1 className="font-display text-[28px] font-semibold leading-none bg-[linear-gradient(180deg,#f8e8ad,#d4af37_55%,#9a7420)] bg-clip-text text-transparent">
+            <h1 className="font-display bg-[linear-gradient(180deg,#f8e8ad,#d4af37_55%,#9a7420)] bg-clip-text text-[28px] leading-none font-semibold text-transparent">
               Velvet Rope
             </h1>
-            <p className="mt-1 text-[12px] text-muted">
-              {door ? `Door #${door.number} · ${door.dateLabel.split(',')[0]}` : ' '}
+            <p className="text-muted mt-1 text-[12px]">
+              {door
+                ? `Door #${door.number} · ${door.dateLabel.split(',')[0]}`
+                : ' '}
             </p>
           </div>
           <span />
@@ -71,13 +75,23 @@ export const Splash = () => {
         <div className="flex flex-col items-center gap-1.5">
           <button
             type="button"
-            className="h-11 w-full max-w-[260px] cursor-pointer rounded-full bg-[linear-gradient(180deg,#ecd27a,#c19a2c)] font-medium text-[#2a0a12] ring-1 ring-gold/60 ring-offset-2 ring-offset-card transition-[filter] hover:brightness-110"
+            className="ring-gold/60 ring-offset-card h-11 w-full max-w-[260px] cursor-pointer rounded-full bg-[linear-gradient(180deg,#ecd27a,#c19a2c)] font-medium text-[#2a0a12] ring-1 ring-offset-2 transition-[filter] hover:brightness-110"
             onClick={(e) => requestExpandedMode(e.nativeEvent, 'game')}
           >
-            {played > 0 ? 'Back to the door' : 'Open the door'}
+            {door?.result
+              ? 'See your result'
+              : played > 0
+                ? 'Back to the door'
+                : 'Open the door'}
           </button>
-          <p className="text-[12px] text-muted">
-            {played > 0 ? `${played} guests sent today` : 'Crack the secret rule'}
+          <p className="text-muted text-[12px]">
+            {door?.result
+              ? door.result.status === 'passed'
+                ? 'Door cracked today'
+                : 'Come back tomorrow'
+              : played > 0
+                ? `${played} guests sent today`
+                : 'Crack the secret rule'}
           </p>
         </div>
       </div>
