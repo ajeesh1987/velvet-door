@@ -41,6 +41,23 @@ export const createPost = async () => {
   });
   await redis.set(dailyKey(number), post.id);
 
+  // Set the flair explicitly too: submitting with a flairId alone has not
+  // always stuck on custom posts.
+  if (flairId && subredditName) {
+    try {
+      await reddit.setPostFlair({
+        subredditName,
+        postId: post.id,
+        flairTemplateId: flairId,
+      });
+      console.log(`daily flair set on ${post.id}`);
+    } catch (error) {
+      console.error(`setPostFlair failed: ${error}`);
+    }
+  } else {
+    console.error('daily flair skipped: no flair id');
+  }
+
   try {
     const last = await redis.get(LAST_KEY);
     if (last && last !== post.id) {

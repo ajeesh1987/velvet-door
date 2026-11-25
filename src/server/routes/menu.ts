@@ -13,7 +13,7 @@ menu.post('/post-create', async (c) => {
 
     return c.json<UiResponse>(
       {
-        navigateTo: `https://reddit.com/comments/${post.id}`,
+        navigateTo: `https://reddit.com${post.permalink}`,
       },
       200
     );
