@@ -7,10 +7,9 @@ const LENS = '#0b0809';
 
 const Glasses = ({ dy }: { dy: number }) => (
   <g transform={`translate(0 ${dy})`}>
-    <rect x="160" y="99" width="18" height="12" rx="4.5" fill={LENS} />
-    <rect x="182" y="99" width="18" height="12" rx="4.5" fill={LENS} />
+    <rect x="161" y="99" width="17" height="12" rx="4.5" fill={LENS} />
+    <rect x="182" y="99" width="17" height="12" rx="4.5" fill={LENS} />
     <path d="M178 103Q180 101 182 103" stroke={LENS} strokeWidth="2.4" fill="none" />
-    <path d="M160 102L156 104M200 102L204 104" stroke={LENS} strokeWidth="2.4" strokeLinecap="round" />
     <path d="M164 102L169 102M186 102L191 102" stroke="#fff" strokeOpacity="0.35" strokeWidth="1.6" strokeLinecap="round" />
   </g>
 );
@@ -53,8 +52,8 @@ const Face = ({ mood }: { mood: Mood }) => {
       return (
         <>
           <Glasses dy={0} />
-          <path d="M162 94L177 93" stroke={INK} strokeWidth="2.2" strokeLinecap="round" />
-          <path d="M183 93L198 94" stroke={INK} strokeWidth="2.2" strokeLinecap="round" />
+          <path d="M163 96L177 95" stroke={INK} strokeWidth="2.2" strokeLinecap="round" />
+          <path d="M183 95L197 96" stroke={INK} strokeWidth="2.2" strokeLinecap="round" />
           <path d="M171 125H189" stroke={INK} strokeWidth="3.4" strokeLinecap="round" />
         </>
       );
