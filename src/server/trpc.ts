@@ -16,6 +16,8 @@ import {
   saveCalls,
 } from './core/exam';
 import { MIN_PROBES, examStatus } from '../shared/result';
+import { shareText } from '../shared/share';
+import { reddit, redis } from '@devvit/web/server';
 import type { Guest } from '../shared/types';
 
 /**
@@ -47,6 +49,22 @@ const examView = (door: Door, calls: boolean[] | null) => {
 
 const missesOf = (view: NonNullable<ReturnType<typeof examView>>) =>
   view.calls.filter((c) => !c.correct).length;
+
+const sharedKey = (n: number, u: string) => `shared:${n}:${u}`;
+
+const shareFor = async (door: Door, userId: string) => {
+  const result = await loadResult(door.number, userId);
+  if (!result) return null;
+  const calls = (await loadCalls(door.number, userId)) ?? [];
+  const view = examView(door, calls);
+  return shareText({
+    doorNumber: door.number,
+    difficulty: door.difficulty,
+    result,
+    correct: view ? view.calls.map((c) => c.correct) : [],
+    total: examGuestsFor(door.entry.id).length,
+  });
+};
 
 export const appRouter = t.router({
   door: t.router({
@@ -86,9 +104,36 @@ export const appRouter = t.router({
 
       const admit = decide(door.entry.rule, input);
       if (userId) {
-        await saveProbes(door.number, userId, [...mine, { guest: input, admit }]);
+        await saveProbes(door.number, userId, [
+          ...mine,
+          { guest: input, admit },
+        ]);
       }
       return { admit, duplicate: false as const };
+    }),
+    sharePreview: publicProcedure.query(async () => {
+      const { userId } = context;
+      if (!userId) throw new TRPCError({ code: 'UNAUTHORIZED' });
+      const door = doorForDay(utcDayIndex());
+      const text = await shareFor(door, userId);
+      if (!text)
+        throw new TRPCError({ code: 'BAD_REQUEST', message: 'not done' });
+      const posted = (await redis.get(sharedKey(door.number, userId))) === '1';
+      return { text, posted };
+    }),
+    share: publicProcedure.mutation(async () => {
+      const { userId, postId } = context;
+      if (!userId || !postId) throw new TRPCError({ code: 'UNAUTHORIZED' });
+      const door = doorForDay(utcDayIndex());
+      const text = await shareFor(door, userId);
+      if (!text)
+        throw new TRPCError({ code: 'BAD_REQUEST', message: 'not done' });
+      if ((await redis.get(sharedKey(door.number, userId))) === '1') {
+        return { posted: true as const, again: true as const };
+      }
+      await reddit.submitComment({ id: postId, text, runAs: 'USER' });
+      await redis.set(sharedKey(door.number, userId), '1');
+      return { posted: true as const, again: false as const };
     }),
     examStart: publicProcedure.mutation(async () => {
       const { userId } = context;
@@ -116,10 +161,12 @@ export const appRouter = t.router({
           throw new TRPCError({ code: 'BAD_REQUEST', message: 'done' });
         }
         const calls = await loadCalls(door.number, userId);
-        if (!calls) throw new TRPCError({ code: 'BAD_REQUEST', message: 'no exam' });
+        if (!calls)
+          throw new TRPCError({ code: 'BAD_REQUEST', message: 'no exam' });
         const guests = examGuestsFor(door.entry.id);
         const guest = guests[calls.length];
-        if (!guest) throw new TRPCError({ code: 'BAD_REQUEST', message: 'no guest' });
+        if (!guest)
+          throw new TRPCError({ code: 'BAD_REQUEST', message: 'no guest' });
 
         const truth = decide(door.entry.rule, guest);
         const next = [...calls, input.call];
@@ -131,7 +178,13 @@ export const appRouter = t.router({
         if (status === 'active') return { correct, status, result: null };
 
         const probes = (await loadProbes(door.number, userId)).length;
-        const result = await finishExam({ door, userId, status, misses, probes });
+        const result = await finishExam({
+          door,
+          userId,
+          status,
+          misses,
+          probes,
+        });
         return { correct, status, result };
       }),
   }),

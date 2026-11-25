@@ -35,4 +35,13 @@ test('a full exam ends with a saved result, and cannot be replayed', async () =>
   expect(after.result).toEqual(last?.result);
   expect(after.exam).toBeNull();
   await expect(api.door.examAnswer({ call: true })).rejects.toThrow();
+
+  const preview = await api.door.sharePreview();
+  expect(preview.posted).toBe(false);
+  expect(preview.text).toContain('Velvet Rope');
+  expect(preview.text).not.toContain(last?.result?.answer ?? 'x');
+});
+
+test('sharing is refused before the day is finished', async () => {
+  await expect(caller().door.sharePreview()).rejects.toThrow();
 });
