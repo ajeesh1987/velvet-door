@@ -38,6 +38,49 @@ export const BANK: BankEntry[] = [
     answer: 'Anything but elf shoes.',
   },
 
+  {
+    id: 't1-cool-tops',
+    tier: 1,
+    rule: trait('top', 'cool'),
+    answer: 'Cool-colored tops only.',
+  },
+  {
+    id: 't1-pointy-shoes',
+    tier: 1,
+    rule: trait('footwear', 'pointy'),
+    answer: 'Pointy footwear only.',
+  },
+  {
+    id: 't1-no-wizard-hat',
+    tier: 1,
+    rule: not(is('headwear', 'wizard')),
+    answer: 'Anything but a wizard hat.',
+  },
+  {
+    id: 't1-warm-items',
+    tier: 1,
+    rule: trait('item', 'warm'),
+    answer: 'Warm-colored items only.',
+  },
+  {
+    id: 't1-round-hats',
+    tier: 1,
+    rule: trait('headwear', 'round'),
+    answer: 'Round headwear only.',
+  },
+  {
+    id: 't1-no-poncho',
+    tier: 1,
+    rule: not(is('top', 'poncho')),
+    answer: 'Anything but a poncho.',
+  },
+  {
+    id: 't1-beanies-only',
+    tier: 1,
+    rule: is('headwear', 'beanie'),
+    answer: 'Blue beanies only.',
+  },
+
   // Tier 2: two attributes
   {
     id: 't2-warm-hat-round-top',
@@ -70,6 +113,73 @@ export const BANK: BankEntry[] = [
     answer: 'A blazer or a torch.',
   },
 
+  {
+    id: 't2-warm-hat-cool-shoes',
+    tier: 2,
+    rule: and(trait('headwear', 'warm'), trait('footwear', 'cool')),
+    answer: 'Warm headwear AND cool footwear.',
+  },
+  {
+    id: 't2-beret-or-kite',
+    tier: 2,
+    rule: or(is('headwear', 'beret'), is('item', 'kite')),
+    answer: 'A red beret or a kite.',
+  },
+  {
+    id: 't2-round-hat-xor-round-item',
+    tier: 2,
+    rule: xor(trait('headwear', 'round'), trait('item', 'round')),
+    answer: 'Round headwear or a round item, but not both.',
+  },
+  {
+    id: 't2-pointy-top-no-sneakers',
+    tier: 2,
+    rule: and(trait('top', 'pointy'), not(is('footwear', 'sneakers'))),
+    answer: 'A pointy top and no sneakers.',
+  },
+  {
+    id: 't2-warm-hat-or-warm-item',
+    tier: 2,
+    rule: or(trait('headwear', 'warm'), trait('item', 'warm')),
+    answer: 'Warm headwear OR a warm item.',
+  },
+  {
+    id: 't2-cool-top-round-item',
+    tier: 2,
+    rule: and(trait('top', 'cool'), trait('item', 'round')),
+    answer: 'A cool top AND a round item.',
+  },
+  {
+    id: 't2-puffer-or-lantern',
+    tier: 2,
+    rule: or(is('top', 'puffer'), is('item', 'lantern')),
+    answer: 'An orange puffer or a lantern.',
+  },
+  {
+    id: 't2-no-heels-no-torch',
+    tier: 2,
+    rule: and(not(is('footwear', 'heels')), not(is('item', 'torch'))),
+    answer: 'No heels and no torch.',
+  },
+  {
+    id: 't2-wizard-or-elf-shoes',
+    tier: 2,
+    rule: or(is('headwear', 'wizard'), is('footwear', 'elfshoes')),
+    answer: 'A wizard hat or elf shoes.',
+  },
+  {
+    id: 't2-pointy-hat-xor-pointy-top',
+    tier: 2,
+    rule: xor(trait('headwear', 'pointy'), trait('top', 'pointy')),
+    answer: 'Pointy headwear or a pointy top, but not both.',
+  },
+  {
+    id: 't2-warm-shoes-pointy-hat',
+    tier: 2,
+    rule: and(trait('footwear', 'warm'), trait('headwear', 'pointy')),
+    answer: 'Warm footwear AND pointy headwear.',
+  },
+
   // Tier 3: relational
   {
     id: 't3-hat-top-same-temp',
@@ -86,10 +196,7 @@ export const BANK: BankEntry[] = [
   {
     id: 't3-all-same-temp',
     tier: 3,
-    rule: and(
-      same('headwear', 'top', 'temp'),
-      same('top', 'item', 'temp'),
-    ),
+    rule: and(same('headwear', 'top', 'temp'), same('top', 'item', 'temp')),
     answer: 'Headwear, top and item all share a temperature.',
   },
   {
@@ -97,8 +204,69 @@ export const BANK: BankEntry[] = [
     tier: 3,
     rule: xor(
       same('headwear', 'top', 'shape'),
-      same('item', 'footwear', 'shape'),
+      same('item', 'footwear', 'shape')
     ),
     answer: 'Exactly one pair (headwear/top, item/footwear) matches in shape.',
+  },
+  {
+    id: 't3-hat-shoes-same-temp',
+    tier: 3,
+    rule: same('headwear', 'footwear', 'temp'),
+    answer: 'Headwear and footwear share a temperature.',
+  },
+  {
+    id: 't3-top-shoes-same-shape',
+    tier: 3,
+    rule: same('top', 'footwear', 'shape'),
+    answer: 'Top and footwear share a shape.',
+  },
+  {
+    id: 't3-hat-item-same-temp',
+    tier: 3,
+    rule: same('headwear', 'item', 'temp'),
+    answer: 'Headwear and item share a temperature.',
+  },
+  {
+    id: 't3-top-item-differ-shape',
+    tier: 3,
+    rule: not(same('top', 'item', 'shape')),
+    answer: 'Top and item have different shapes.',
+  },
+  {
+    id: 't3-hat-top-differ-temp',
+    tier: 3,
+    rule: not(same('headwear', 'top', 'temp')),
+    answer: 'Headwear and top have different temperatures.',
+  },
+  {
+    id: 't3-hat-top-same-shape-warm-item',
+    tier: 3,
+    rule: and(same('headwear', 'top', 'shape'), trait('item', 'warm')),
+    answer: 'Headwear and top share a shape, AND the item is warm.',
+  },
+  {
+    id: 't3-top-item-same-temp-round-hat',
+    tier: 3,
+    rule: and(same('top', 'item', 'temp'), trait('headwear', 'round')),
+    answer: 'Top and item share a temperature, AND the headwear is round.',
+  },
+  {
+    id: 't3-temp-pairs-differ',
+    tier: 3,
+    rule: xor(
+      same('headwear', 'item', 'temp'),
+      same('top', 'footwear', 'temp')
+    ),
+    answer:
+      'Exactly one pair (headwear/item, top/footwear) matches in temperature.',
+  },
+  {
+    id: 't3-shoes-match-hat-or-top-temp',
+    tier: 3,
+    rule: or(
+      same('headwear', 'footwear', 'temp'),
+      same('top', 'footwear', 'temp')
+    ),
+    answer: 'Footwear shares a temperature with the headwear OR the top.',
   },
 ];

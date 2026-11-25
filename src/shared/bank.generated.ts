@@ -215,6 +215,482 @@ export const RULE_META: Record<string, RuleMeta> = {
     "botProbes": 4,
     "complexity": 1
   },
+  "t1-cool-tops": {
+    "evidence": {
+      "admit": {
+        "headwear": "beret",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "elfshoes"
+      },
+      "reject": {
+        "headwear": "partyhat",
+        "top": "puffer",
+        "item": "snowglobe",
+        "footwear": "heels"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "beanie",
+        "top": "puffer",
+        "item": "torch",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "wizard",
+        "top": "puffer",
+        "item": "kite",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beret",
+        "top": "sweater",
+        "item": "kite",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "blazer",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beanie",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "beret",
+        "top": "puffer",
+        "item": "lantern",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      }
+    ],
+    "botProbes": 4,
+    "complexity": 1
+  },
+  "t1-pointy-shoes": {
+    "evidence": {
+      "admit": {
+        "headwear": "beret",
+        "top": "puffer",
+        "item": "snowglobe",
+        "footwear": "elfshoes"
+      },
+      "reject": {
+        "headwear": "beanie",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "beanie",
+        "top": "sweater",
+        "item": "lantern",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "beanie",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "blazer",
+        "item": "kite",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beret",
+        "top": "poncho",
+        "item": "torch",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "wizard",
+        "top": "puffer",
+        "item": "torch",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "blazer",
+        "item": "kite",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "beret",
+        "top": "puffer",
+        "item": "torch",
+        "footwear": "sneakers"
+      }
+    ],
+    "botProbes": 4,
+    "complexity": 1
+  },
+  "t1-no-wizard-hat": {
+    "evidence": {
+      "admit": {
+        "headwear": "beanie",
+        "top": "blazer",
+        "item": "kite",
+        "footwear": "rainboots"
+      },
+      "reject": {
+        "headwear": "wizard",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "rainboots"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "partyhat",
+        "top": "blazer",
+        "item": "torch",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beret",
+        "top": "poncho",
+        "item": "kite",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "wizard",
+        "top": "puffer",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "puffer",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "wizard",
+        "top": "poncho",
+        "item": "kite",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beanie",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "wizard",
+        "top": "blazer",
+        "item": "snowglobe",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "lantern",
+        "footwear": "rainboots"
+      }
+    ],
+    "botProbes": 5,
+    "complexity": 1
+  },
+  "t1-warm-items": {
+    "evidence": {
+      "admit": {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "rainboots"
+      },
+      "reject": {
+        "headwear": "partyhat",
+        "top": "blazer",
+        "item": "snowglobe",
+        "footwear": "sneakers"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "snowglobe",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "beret",
+        "top": "blazer",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "beret",
+        "top": "puffer",
+        "item": "kite",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "kite",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "beanie",
+        "top": "puffer",
+        "item": "torch",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "blazer",
+        "item": "kite",
+        "footwear": "sneakers"
+      }
+    ],
+    "botProbes": 5,
+    "complexity": 1
+  },
+  "t1-round-hats": {
+    "evidence": {
+      "admit": {
+        "headwear": "beanie",
+        "top": "poncho",
+        "item": "torch",
+        "footwear": "heels"
+      },
+      "reject": {
+        "headwear": "wizard",
+        "top": "puffer",
+        "item": "snowglobe",
+        "footwear": "heels"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "beanie",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "beanie",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beanie",
+        "top": "blazer",
+        "item": "lantern",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beret",
+        "top": "puffer",
+        "item": "torch",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "puffer",
+        "item": "torch",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "wizard",
+        "top": "blazer",
+        "item": "kite",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "wizard",
+        "top": "puffer",
+        "item": "lantern",
+        "footwear": "rainboots"
+      }
+    ],
+    "botProbes": 5,
+    "complexity": 1
+  },
+  "t1-no-poncho": {
+    "evidence": {
+      "admit": {
+        "headwear": "beanie",
+        "top": "blazer",
+        "item": "kite",
+        "footwear": "elfshoes"
+      },
+      "reject": {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "kite",
+        "footwear": "elfshoes"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "lantern",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beanie",
+        "top": "poncho",
+        "item": "torch",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beret",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "wizard",
+        "top": "poncho",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beanie",
+        "top": "puffer",
+        "item": "snowglobe",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "kite",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "blazer",
+        "item": "kite",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "kite",
+        "footwear": "heels"
+      }
+    ],
+    "botProbes": 4,
+    "complexity": 1
+  },
+  "t1-beanies-only": {
+    "evidence": {
+      "admit": {
+        "headwear": "beanie",
+        "top": "puffer",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      "reject": {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "rainboots"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "beret",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "puffer",
+        "item": "torch",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beret",
+        "top": "blazer",
+        "item": "kite",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beanie",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beanie",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "beanie",
+        "top": "puffer",
+        "item": "snowglobe",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "beanie",
+        "top": "blazer",
+        "item": "kite",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "wizard",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "sneakers"
+      }
+    ],
+    "botProbes": 5,
+    "complexity": 1
+  },
   "t2-warm-hat-round-top": {
     "evidence": {
       "admit": {
@@ -555,6 +1031,754 @@ export const RULE_META: Record<string, RuleMeta> = {
     "botProbes": 10,
     "complexity": 2
   },
+  "t2-warm-hat-cool-shoes": {
+    "evidence": {
+      "admit": {
+        "headwear": "beret",
+        "top": "puffer",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      "reject": {
+        "headwear": "wizard",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "elfshoes"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "beanie",
+        "top": "puffer",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beret",
+        "top": "blazer",
+        "item": "kite",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "beret",
+        "top": "puffer",
+        "item": "lantern",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beret",
+        "top": "blazer",
+        "item": "kite",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "beret",
+        "top": "poncho",
+        "item": "torch",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "elfshoes"
+      }
+    ],
+    "botProbes": 10,
+    "complexity": 2
+  },
+  "t2-beret-or-kite": {
+    "evidence": {
+      "admit": {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "kite",
+        "footwear": "rainboots"
+      },
+      "reject": {
+        "headwear": "beanie",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "rainboots"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "beanie",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beanie",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beret",
+        "top": "sweater",
+        "item": "kite",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beret",
+        "top": "sweater",
+        "item": "lantern",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "beanie",
+        "top": "sweater",
+        "item": "kite",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beret",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "sneakers"
+      }
+    ],
+    "botProbes": 10,
+    "complexity": 2
+  },
+  "t2-round-hat-xor-round-item": {
+    "evidence": {
+      "admit": {
+        "headwear": "beanie",
+        "top": "blazer",
+        "item": "kite",
+        "footwear": "heels"
+      },
+      "reject": {
+        "headwear": "beanie",
+        "top": "blazer",
+        "item": "snowglobe",
+        "footwear": "elfshoes"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "beanie",
+        "top": "poncho",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "wizard",
+        "top": "puffer",
+        "item": "kite",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "blazer",
+        "item": "torch",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beanie",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "beret",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "beret",
+        "top": "puffer",
+        "item": "kite",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "wizard",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "elfshoes"
+      }
+    ],
+    "botProbes": 4,
+    "complexity": 1
+  },
+  "t2-pointy-top-no-sneakers": {
+    "evidence": {
+      "admit": {
+        "headwear": "wizard",
+        "top": "blazer",
+        "item": "torch",
+        "footwear": "rainboots"
+      },
+      "reject": {
+        "headwear": "beret",
+        "top": "sweater",
+        "item": "lantern",
+        "footwear": "rainboots"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "partyhat",
+        "top": "blazer",
+        "item": "torch",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beanie",
+        "top": "blazer",
+        "item": "lantern",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "beanie",
+        "top": "blazer",
+        "item": "lantern",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "wizard",
+        "top": "puffer",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "lantern",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beanie",
+        "top": "blazer",
+        "item": "lantern",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "kite",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "kite",
+        "footwear": "elfshoes"
+      }
+    ],
+    "botProbes": 10,
+    "complexity": 2
+  },
+  "t2-warm-hat-or-warm-item": {
+    "evidence": {
+      "admit": {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "snowglobe",
+        "footwear": "sneakers"
+      },
+      "reject": {
+        "headwear": "wizard",
+        "top": "poncho",
+        "item": "kite",
+        "footwear": "rainboots"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "partyhat",
+        "top": "puffer",
+        "item": "torch",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "wizard",
+        "top": "puffer",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beanie",
+        "top": "puffer",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beanie",
+        "top": "blazer",
+        "item": "snowglobe",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "beanie",
+        "top": "blazer",
+        "item": "lantern",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "beret",
+        "top": "blazer",
+        "item": "snowglobe",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "wizard",
+        "top": "poncho",
+        "item": "kite",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beret",
+        "top": "blazer",
+        "item": "lantern",
+        "footwear": "heels"
+      }
+    ],
+    "botProbes": 10,
+    "complexity": 2
+  },
+  "t2-cool-top-round-item": {
+    "evidence": {
+      "admit": {
+        "headwear": "wizard",
+        "top": "poncho",
+        "item": "snowglobe",
+        "footwear": "elfshoes"
+      },
+      "reject": {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "torch",
+        "footwear": "elfshoes"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "torch",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "wizard",
+        "top": "poncho",
+        "item": "kite",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beanie",
+        "top": "poncho",
+        "item": "snowglobe",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "wizard",
+        "top": "poncho",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "wizard",
+        "top": "blazer",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "lantern",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beanie",
+        "top": "sweater",
+        "item": "lantern",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "blazer",
+        "item": "kite",
+        "footwear": "elfshoes"
+      }
+    ],
+    "botProbes": 10,
+    "complexity": 2
+  },
+  "t2-puffer-or-lantern": {
+    "evidence": {
+      "admit": {
+        "headwear": "beret",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "rainboots"
+      },
+      "reject": {
+        "headwear": "beanie",
+        "top": "poncho",
+        "item": "kite",
+        "footwear": "rainboots"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "lantern",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "puffer",
+        "item": "lantern",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "lantern",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "blazer",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "puffer",
+        "item": "torch",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "sneakers"
+      }
+    ],
+    "botProbes": 10,
+    "complexity": 2
+  },
+  "t2-no-heels-no-torch": {
+    "evidence": {
+      "admit": {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "kite",
+        "footwear": "elfshoes"
+      },
+      "reject": {
+        "headwear": "beanie",
+        "top": "poncho",
+        "item": "torch",
+        "footwear": "elfshoes"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "beret",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "beanie",
+        "top": "poncho",
+        "item": "torch",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "beret",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "beret",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "beanie",
+        "top": "poncho",
+        "item": "kite",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beret",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beanie",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "heels"
+      }
+    ],
+    "botProbes": 10,
+    "complexity": 2
+  },
+  "t2-wizard-or-elf-shoes": {
+    "evidence": {
+      "admit": {
+        "headwear": "wizard",
+        "top": "blazer",
+        "item": "lantern",
+        "footwear": "heels"
+      },
+      "reject": {
+        "headwear": "beret",
+        "top": "sweater",
+        "item": "lantern",
+        "footwear": "rainboots"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "beanie",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "lantern",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "beanie",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beanie",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "rainboots"
+      }
+    ],
+    "botProbes": 10,
+    "complexity": 2
+  },
+  "t2-pointy-hat-xor-pointy-top": {
+    "evidence": {
+      "admit": {
+        "headwear": "beret",
+        "top": "blazer",
+        "item": "kite",
+        "footwear": "elfshoes"
+      },
+      "reject": {
+        "headwear": "beret",
+        "top": "puffer",
+        "item": "kite",
+        "footwear": "rainboots"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "beret",
+        "top": "poncho",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "beanie",
+        "top": "blazer",
+        "item": "lantern",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "wizard",
+        "top": "puffer",
+        "item": "snowglobe",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "beret",
+        "top": "puffer",
+        "item": "kite",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "beanie",
+        "top": "sweater",
+        "item": "kite",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "wizard",
+        "top": "blazer",
+        "item": "snowglobe",
+        "footwear": "sneakers"
+      }
+    ],
+    "botProbes": 4,
+    "complexity": 1
+  },
+  "t2-warm-shoes-pointy-hat": {
+    "evidence": {
+      "admit": {
+        "headwear": "partyhat",
+        "top": "puffer",
+        "item": "torch",
+        "footwear": "rainboots"
+      },
+      "reject": {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "kite",
+        "footwear": "elfshoes"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "partyhat",
+        "top": "puffer",
+        "item": "snowglobe",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "wizard",
+        "top": "blazer",
+        "item": "kite",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beret",
+        "top": "blazer",
+        "item": "torch",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "wizard",
+        "top": "blazer",
+        "item": "kite",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beanie",
+        "top": "blazer",
+        "item": "kite",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "wizard",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "lantern",
+        "footwear": "heels"
+      }
+    ],
+    "botProbes": 10,
+    "complexity": 2
+  },
   "t3-hat-top-same-temp": {
     "evidence": {
       "admit": {
@@ -822,6 +2046,618 @@ export const RULE_META: Record<string, RuleMeta> = {
         "top": "puffer",
         "item": "torch",
         "footwear": "rainboots"
+      }
+    ],
+    "botProbes": 10,
+    "complexity": 2
+  },
+  "t3-hat-shoes-same-temp": {
+    "evidence": {
+      "admit": {
+        "headwear": "wizard",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "sneakers"
+      },
+      "reject": {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "snowglobe",
+        "footwear": "elfshoes"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "wizard",
+        "top": "blazer",
+        "item": "lantern",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "kite",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beret",
+        "top": "blazer",
+        "item": "lantern",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "kite",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beret",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "wizard",
+        "top": "poncho",
+        "item": "kite",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beanie",
+        "top": "puffer",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      }
+    ],
+    "botProbes": 4,
+    "complexity": 1
+  },
+  "t3-top-shoes-same-shape": {
+    "evidence": {
+      "admit": {
+        "headwear": "beret",
+        "top": "puffer",
+        "item": "kite",
+        "footwear": "sneakers"
+      },
+      "reject": {
+        "headwear": "beret",
+        "top": "sweater",
+        "item": "kite",
+        "footwear": "heels"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "beanie",
+        "top": "poncho",
+        "item": "torch",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beret",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "blazer",
+        "item": "lantern",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beanie",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "wizard",
+        "top": "puffer",
+        "item": "kite",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "wizard",
+        "top": "blazer",
+        "item": "kite",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "wizard",
+        "top": "puffer",
+        "item": "kite",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beret",
+        "top": "poncho",
+        "item": "snowglobe",
+        "footwear": "elfshoes"
+      }
+    ],
+    "botProbes": 4,
+    "complexity": 1
+  },
+  "t3-hat-item-same-temp": {
+    "evidence": {
+      "admit": {
+        "headwear": "beanie",
+        "top": "sweater",
+        "item": "kite",
+        "footwear": "sneakers"
+      },
+      "reject": {
+        "headwear": "beanie",
+        "top": "puffer",
+        "item": "torch",
+        "footwear": "heels"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "beanie",
+        "top": "blazer",
+        "item": "snowglobe",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "beanie",
+        "top": "blazer",
+        "item": "lantern",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "wizard",
+        "top": "puffer",
+        "item": "kite",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beret",
+        "top": "blazer",
+        "item": "lantern",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "beret",
+        "top": "poncho",
+        "item": "torch",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "wizard",
+        "top": "poncho",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "beret",
+        "top": "puffer",
+        "item": "kite",
+        "footwear": "heels"
+      }
+    ],
+    "botProbes": 4,
+    "complexity": 1
+  },
+  "t3-top-item-differ-shape": {
+    "evidence": {
+      "admit": {
+        "headwear": "beanie",
+        "top": "blazer",
+        "item": "lantern",
+        "footwear": "sneakers"
+      },
+      "reject": {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "lantern",
+        "footwear": "elfshoes"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "lantern",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beret",
+        "top": "blazer",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "kite",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beanie",
+        "top": "blazer",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beanie",
+        "top": "puffer",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "beanie",
+        "top": "puffer",
+        "item": "kite",
+        "footwear": "rainboots"
+      }
+    ],
+    "botProbes": 4,
+    "complexity": 1
+  },
+  "t3-hat-top-differ-temp": {
+    "evidence": {
+      "admit": {
+        "headwear": "wizard",
+        "top": "puffer",
+        "item": "torch",
+        "footwear": "heels"
+      },
+      "reject": {
+        "headwear": "beret",
+        "top": "puffer",
+        "item": "lantern",
+        "footwear": "elfshoes"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "partyhat",
+        "top": "blazer",
+        "item": "torch",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "wizard",
+        "top": "puffer",
+        "item": "snowglobe",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beanie",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beanie",
+        "top": "blazer",
+        "item": "torch",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beret",
+        "top": "puffer",
+        "item": "kite",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "beret",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "elfshoes"
+      }
+    ],
+    "botProbes": 4,
+    "complexity": 1
+  },
+  "t3-hat-top-same-shape-warm-item": {
+    "evidence": {
+      "admit": {
+        "headwear": "wizard",
+        "top": "blazer",
+        "item": "lantern",
+        "footwear": "sneakers"
+      },
+      "reject": {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "kite",
+        "footwear": "sneakers"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "wizard",
+        "top": "blazer",
+        "item": "kite",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "wizard",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "wizard",
+        "top": "blazer",
+        "item": "torch",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beanie",
+        "top": "puffer",
+        "item": "torch",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beanie",
+        "top": "blazer",
+        "item": "torch",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "sweater",
+        "item": "kite",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "blazer",
+        "item": "snowglobe",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "beret",
+        "top": "sweater",
+        "item": "lantern",
+        "footwear": "elfshoes"
+      }
+    ],
+    "botProbes": 9,
+    "complexity": 2
+  },
+  "t3-top-item-same-temp-round-hat": {
+    "evidence": {
+      "admit": {
+        "headwear": "beret",
+        "top": "sweater",
+        "item": "kite",
+        "footwear": "rainboots"
+      },
+      "reject": {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "sneakers"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "wizard",
+        "top": "puffer",
+        "item": "torch",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "beanie",
+        "top": "blazer",
+        "item": "torch",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beret",
+        "top": "blazer",
+        "item": "lantern",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "partyhat",
+        "top": "poncho",
+        "item": "kite",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "beanie",
+        "top": "sweater",
+        "item": "kite",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "beanie",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "lantern",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beanie",
+        "top": "puffer",
+        "item": "torch",
+        "footwear": "heels"
+      }
+    ],
+    "botProbes": 10,
+    "complexity": 2
+  },
+  "t3-temp-pairs-differ": {
+    "evidence": {
+      "admit": {
+        "headwear": "beanie",
+        "top": "puffer",
+        "item": "lantern",
+        "footwear": "heels"
+      },
+      "reject": {
+        "headwear": "partyhat",
+        "top": "puffer",
+        "item": "kite",
+        "footwear": "elfshoes"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "beret",
+        "top": "blazer",
+        "item": "lantern",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beanie",
+        "top": "sweater",
+        "item": "torch",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "beret",
+        "top": "blazer",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beanie",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beret",
+        "top": "blazer",
+        "item": "lantern",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beret",
+        "top": "poncho",
+        "item": "lantern",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "heels"
+      },
+      {
+        "headwear": "wizard",
+        "top": "blazer",
+        "item": "torch",
+        "footwear": "sneakers"
+      }
+    ],
+    "botProbes": 9,
+    "complexity": 2
+  },
+  "t3-shoes-match-hat-or-top-temp": {
+    "evidence": {
+      "admit": {
+        "headwear": "beret",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "sneakers"
+      },
+      "reject": {
+        "headwear": "beanie",
+        "top": "sweater",
+        "item": "lantern",
+        "footwear": "rainboots"
+      }
+    },
+    "exam": [
+      {
+        "headwear": "wizard",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "wizard",
+        "top": "puffer",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beanie",
+        "top": "puffer",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beanie",
+        "top": "sweater",
+        "item": "snowglobe",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beret",
+        "top": "puffer",
+        "item": "lantern",
+        "footwear": "elfshoes"
+      },
+      {
+        "headwear": "beret",
+        "top": "puffer",
+        "item": "kite",
+        "footwear": "rainboots"
+      },
+      {
+        "headwear": "beret",
+        "top": "puffer",
+        "item": "kite",
+        "footwear": "sneakers"
+      },
+      {
+        "headwear": "beanie",
+        "top": "puffer",
+        "item": "kite",
+        "footwear": "sneakers"
       }
     ],
     "botProbes": 10,
