@@ -39,9 +39,9 @@ body {
   to { opacity: 1; }
 }
 @keyframes vr-pop {
-  0% { transform: scale(0.9); opacity: 0; box-shadow: 0 0 0 0 var(--vr-glow, transparent); }
+  0% { transform: scale(0.9); opacity: 0; }
   60% { transform: scale(1.04); opacity: 1; }
-  100% { transform: scale(1); box-shadow: 0 0 0 0 transparent; }
+  100% { transform: scale(1); }
 }
 
 .nod { animation: vr-nod 600ms ease-in-out; }

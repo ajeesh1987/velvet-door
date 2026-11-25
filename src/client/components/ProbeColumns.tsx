@@ -6,28 +6,22 @@ import { cn } from '../utils';
 
 export type HistoryItem = Probe & { starter: boolean };
 
-const Pill = ({
-  item,
-  fresh,
-}: {
-  item: HistoryItem;
-  fresh: boolean;
-}) => (
+const Pill = ({ item, fresh }: { item: HistoryItem; fresh: boolean }) => (
   <li
     className={cn(
-      'flex items-center justify-center gap-1 rounded-full border-2 bg-panel px-2 py-1',
+      'flex items-center justify-center gap-1 rounded-full border-2 bg-panel px-2 py-0.5',
       item.admit ? 'border-good' : 'border-bad',
       fresh && 'pill-new'
     )}
-    style={{ ['--vr-glow' as string]: item.admit ? '#6bbf8f' : '#d9605a' }}
     aria-label={item.admit ? 'Let in' : 'Turned away'}
   >
     {ATTRS.map((attr) => (
-      <PartIcon key={attr} attr={attr} id={item.guest[attr]} size={26} />
+      <PartIcon key={attr} attr={attr} id={item.guest[attr]} size={24} />
     ))}
   </li>
 );
 
+/** Two columns, newest guest on top, so the latest result is always in view. */
 export const ProbeColumns = ({
   items,
   latestKey,
@@ -40,15 +34,15 @@ export const ProbeColumns = ({
     { title: 'Turned away', tone: 'text-bad', admit: false },
   ];
   return (
-    <div className="grid min-h-0 flex-1 grid-cols-2 gap-2">
+    <div className="grid min-h-[100px] flex-1 grid-cols-2 gap-2">
       {columns.map((col) => {
-        const rows = items.filter((i) => i.admit === col.admit);
+        const rows = items.filter((i) => i.admit === col.admit).reverse();
         return (
-          <section key={col.title} className="flex min-h-0 flex-col gap-1.5">
+          <section key={col.title} className="flex min-h-0 flex-col gap-1">
             <h2 className={cn('text-[12px] font-medium', col.tone)}>
               {col.title} ({rows.length})
             </h2>
-            <ul className="flex min-h-0 flex-1 flex-col gap-1.5 overflow-y-auto pr-0.5">
+            <ul className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto pr-0.5">
               {rows.map((item) => (
                 <Pill
                   key={guestKey(item.guest)}

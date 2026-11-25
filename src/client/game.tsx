@@ -111,18 +111,17 @@ export const App = () => {
   }
 
   return (
-    <main className="mx-auto flex min-h-full max-w-[460px] flex-col gap-3 p-3">
-      <header className="flex items-start justify-between gap-3">
-        <div>
-          <h1 className="font-display text-2xl leading-none text-gold-soft">
-            {door ? `Door #${door.number}` : 'Velvet Rope'}
-          </h1>
-          <div className="mt-1.5 flex items-center gap-2 text-[12px] text-muted">
-            <span>{door?.dateLabel ?? 'Opening the door'}</span>
+    <main className="mx-auto flex h-full max-w-[460px] flex-col gap-2 overflow-y-auto p-3">
+      <header className="flex shrink-0 items-center justify-between gap-3">
+        <div className="min-w-0">
+          <div className="flex items-center gap-2">
+            <h1 className="font-display text-xl leading-none text-gold-soft">
+              {door ? `Door #${door.number}` : 'Velvet Rope'}
+            </h1>
             {door ? (
               <span
                 className={cn(
-                  'rounded-full border px-2 py-px font-medium capitalize',
+                  'rounded-full border px-2 py-px text-[11px] font-medium capitalize',
                   BADGE[door.difficulty]
                 )}
               >
@@ -130,12 +129,15 @@ export const App = () => {
               </span>
             ) : null}
           </div>
+          <div className="mt-1 truncate text-[12px] text-muted">
+            {door?.dateLabel ?? 'Opening the door'}
+          </div>
         </div>
         <button
           type="button"
           aria-label="How to play"
           onClick={() => setHelp(true)}
-          className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-gold/60 font-display text-lg text-gold-soft transition-colors hover:bg-stage"
+          className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full border border-gold/60 font-display text-base text-gold-soft transition-colors hover:bg-stage"
         >
           ?
         </button>
@@ -145,18 +147,19 @@ export const App = () => {
         phase={phase}
         guest={guest}
         cycle={cycle}
-        className="mx-auto max-h-[30vh] w-full"
+        framed
+        className="mx-auto max-h-[28vh] w-full shrink-0"
       />
 
       <GuestBuilder guest={guest} onChange={setGuest} />
 
-      <div className="flex items-center gap-2">
+      <div className="flex shrink-0 items-center gap-2">
         <button
           type="button"
           onClick={() => setGuest(randomGuest())}
           aria-label="Random guest"
           title="Random guest"
-          className="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full border border-gold/60 text-gold-soft transition-colors hover:bg-stage"
+          className="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-full border border-gold/60 text-gold-soft transition-colors hover:bg-stage"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" strokeWidth="1.8" />
@@ -171,20 +174,21 @@ export const App = () => {
           onClick={() => void send()}
           aria-disabled={phase !== 'idle' || !door}
           className={cn(
-            'h-11 flex-1 cursor-pointer rounded-full bg-gold font-medium text-[#2a0a12] transition-colors hover:bg-gold-soft',
+            'h-10 flex-1 cursor-pointer rounded-full bg-[linear-gradient(180deg,#ecd27a,#c19a2c)] font-medium text-[#2a0a12] transition-[filter] hover:brightness-110',
             (phase !== 'idle' || !door) && 'opacity-60'
           )}
         >
           Send guest
         </button>
-        <div className="w-16 shrink-0 text-right text-[12px] leading-tight text-muted">
-          <div className="text-lg text-cream">{sent}</div>
-          sent
+        <div className="w-14 shrink-0 text-right text-[12px] leading-tight text-muted">
+          <span className="text-lg text-cream">{sent}</span> sent
         </div>
       </div>
-      <p className="min-h-4 text-[12px] text-bad" role="status">
-        {note ?? ''}
-      </p>
+      {note ? (
+        <p className="shrink-0 text-[12px] text-bad" role="status">
+          {note}
+        </p>
+      ) : null}
 
       <ProbeColumns items={history} latestKey={latest} />
 

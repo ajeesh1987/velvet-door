@@ -6,6 +6,7 @@ import { createRoot } from 'react-dom/client';
 import type { inferRouterOutputs } from '@trpc/server';
 import type { AppRouter } from '../server/trpc';
 import { DoorScene } from './art/scene';
+import { DecoFrame } from './components/DecoFrame';
 import { trpc } from './trpc';
 import { cn } from './utils';
 
@@ -36,46 +37,47 @@ export const Splash = () => {
   const played = door ? door.probes.length : 0;
 
   return (
-    <div className="box-border h-screen min-h-[260px] bg-card p-1.5">
-      <div className="flex h-full flex-col overflow-hidden rounded-xl border-[1.5px] border-gold bg-card">
-        <div className="flex items-start justify-between gap-2 px-3 pt-2.5">
+    <div className="relative box-border h-screen min-h-[270px] bg-card px-6 pb-4 pt-4">
+      <DecoFrame />
+      <div className="relative flex h-full flex-col">
+        <div className="grid grid-cols-[64px_1fr_64px] items-start">
           <span
             className={cn(
-              'rounded-full border px-2 py-px text-[12px] font-medium capitalize',
+              'w-fit rounded-full border px-2.5 py-px text-[12px] font-medium capitalize shadow-[0_0_8px_currentColor]',
               door ? BADGE[door.difficulty] : 'border-transparent text-transparent'
             )}
           >
             {door?.difficulty ?? 'easy'}
           </span>
-          <h1 className="font-display text-xl leading-none text-gold-soft">
-            Velvet Rope
-          </h1>
-          <span className="min-w-[44px] text-right text-[12px] text-muted">
-            {door ? `Door #${door.number}` : ''}
-          </span>
+          <div className="text-center">
+            <h1 className="font-display text-[28px] font-semibold leading-none bg-[linear-gradient(180deg,#f8e8ad,#d4af37_55%,#9a7420)] bg-clip-text text-transparent">
+              Velvet Rope
+            </h1>
+            <p className="mt-1 text-[12px] text-muted">
+              {door ? `Door #${door.number} · ${door.dateLabel.split(',')[0]}` : ' '}
+            </p>
+          </div>
+          <span />
         </div>
-        <div className="min-h-0 flex-1 px-3 py-1">
+        <div className="min-h-0 flex-1 py-1">
           <DoorScene
             phase="idle"
             guest={null}
             cycle={0}
-            className="mx-auto h-full w-full"
+            framed={false}
+            className="mx-auto h-full w-full overflow-visible"
           />
         </div>
-        <div className="flex flex-col items-center gap-1 px-3 pb-3">
+        <div className="flex flex-col items-center gap-1.5">
           <button
             type="button"
-            className="h-11 w-full max-w-[260px] cursor-pointer rounded-full bg-gold font-medium text-[#2a0a12] transition-colors hover:bg-gold-soft"
+            className="h-11 w-full max-w-[260px] cursor-pointer rounded-full bg-[linear-gradient(180deg,#ecd27a,#c19a2c)] font-medium text-[#2a0a12] ring-1 ring-gold/60 ring-offset-2 ring-offset-card transition-[filter] hover:brightness-110"
             onClick={(e) => requestExpandedMode(e.nativeEvent, 'game')}
           >
             {played > 0 ? 'Back to the door' : 'Open the door'}
           </button>
           <p className="text-[12px] text-muted">
-            {door
-              ? played > 0
-                ? `${door.dateLabel} · ${played} guests sent`
-                : `${door.dateLabel} · crack the secret rule`
-              : 'Crack the secret rule'}
+            {played > 0 ? `${played} guests sent today` : 'Crack the secret rule'}
           </p>
         </div>
       </div>

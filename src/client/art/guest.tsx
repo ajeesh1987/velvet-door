@@ -25,7 +25,7 @@ export const GuestFigure = ({ guest }: { guest: Guest }) => (
     <circle cx="54" cy="53" r="1.8" fill="#2a1b17" />
     <circle cx="66" cy="53" r="1.8" fill="#2a1b17" />
     <path d="M55 60Q60 63 65 60" stroke="#2a1b17" strokeWidth="1.6" fill="none" />
-    <g transform="translate(33 4) scale(1.125)">
+    <g transform="translate(36 -3) scale(1)">
       <PartArt attr="headwear" id={guest.headwear} />
     </g>
     <g transform="translate(78 98) scale(0.85)">
