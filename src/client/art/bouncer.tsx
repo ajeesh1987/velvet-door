@@ -45,7 +45,7 @@ const Face = ({ mood }: { mood: Mood }) => {
           <Glasses dy={0} />
           <path d="M161 92L178 98" stroke={INK} strokeWidth="2.6" strokeLinecap="round" />
           <path d="M199 92L182 98" stroke={INK} strokeWidth="2.6" strokeLinecap="round" />
-          <path d="M169 130Q180 117 191 130" stroke={INK} strokeWidth="4" fill="none" strokeLinecap="round" />
+          <path d="M171 129Q180 121 189 129" stroke={INK} strokeWidth="3" fill="none" strokeLinecap="round" />
         </>
       );
     case 'idle':
@@ -60,43 +60,66 @@ const Face = ({ mood }: { mood: Mood }) => {
   }
 };
 
-/** A raised palm that says stop. Only shown when he turns someone away. */
+const SL = '#262024';
+const ED = '#5b4b51';
+
+/** Reject pose: right arm up with an open palm, left arm hanging at his side. */
 const StopHand = () => (
   <g className="guest-in">
-    <rect x="216" y="150" width="9" height="32" rx="4.5" fill={SKIN} transform="rotate(14 220 166)" />
-    <rect x="226" y="146" width="9" height="36" rx="4.5" fill={SKIN} transform="rotate(6 230 164)" />
-    <rect x="236" y="148" width="9" height="34" rx="4.5" fill={SKIN} transform="rotate(-2 240 165)" />
-    <rect x="246" y="153" width="8" height="28" rx="4" fill={SKIN} transform="rotate(-10 250 167)" />
-    <rect x="218" y="168" width="38" height="26" rx="11" fill={SKIN} />
-    <rect x="224" y="188" width="26" height="30" rx="6" fill="#24202a" />
+    <path d="M138 154L137 186" stroke={ED} strokeWidth="14.5" strokeLinecap="round" />
+    <path d="M138 154L137 186" stroke={SL} strokeWidth="12" strokeLinecap="round" />
+    <circle cx="137" cy="191" r="6" fill={SKIN} />
+    <path d="M224 152L240 168L240 146" stroke={ED} strokeWidth="14.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <path d="M224 152L240 168L240 146" stroke={SL} strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <rect x="231" y="124" width="18" height="18" rx="7" fill={SKIN} />
+    <rect x="231" y="111" width="4" height="17" rx="2" fill={SKIN} />
+    <rect x="236" y="108" width="4" height="19" rx="2" fill={SKIN} />
+    <rect x="241" y="109" width="4" height="18" rx="2" fill={SKIN} />
+    <rect x="246" y="113" width="4" height="15" rx="2" fill={SKIN} />
+    <rect x="226" y="128" width="4.5" height="11" rx="2.2" fill={SKIN} transform="rotate(-25 228 133)" />
   </g>
 );
 
 /** The bouncer, centered at x = 180. His head animates with the mood. */
 export const Bouncer = ({ mood }: { mood: Mood }) => (
   <g>
+    <rect x="158" y="184" width="19" height="30" rx="3" fill="#141012" />
+    <rect x="183" y="184" width="19" height="30" rx="3" fill="#141012" />
+    <ellipse cx="164" cy="213" rx="13" ry="3.5" fill="#0b0809" />
+    <ellipse cx="196" cy="213" rx="13" ry="3.5" fill="#0b0809" />
     <path
-      d="M128 214V166Q128 141 156 137H204Q232 141 232 166V214Z"
-      fill="#1f1a1c"
-      stroke="#5b4b51"
+      d="M134 170Q132 142 157 137H203Q228 142 226 170L219 192H141Z"
+      fill="#1c1719"
+      stroke={ED}
       strokeWidth="1.5"
+      strokeLinejoin="round"
     />
-    <polygon points="166,137 194,137 180,180" fill="#efe3cf" />
-    <polygon points="156,138 168,137 181,181 158,170" fill="#2e2629" stroke="#5b4b51" strokeWidth="1" />
-    <polygon points="204,138 192,137 179,181 202,170" fill="#2e2629" stroke="#5b4b51" strokeWidth="1" />
-    <polygon points="180,148 166,139 166,157" fill="#d4af37" />
-    <polygon points="180,148 194,139 194,157" fill="#d4af37" />
-    <circle cx="180" cy="148" r="3" fill="#a8841f" />
+    <polygon points="169,137 191,137 180,172" fill="#e9e0d0" />
+    <polygon points="157,138 169,137 181,174 160,165" fill="#2a2226" stroke={ED} strokeWidth="1" />
+    <polygon points="203,138 191,137 179,174 200,165" fill="#2a2226" stroke={ED} strokeWidth="1" />
+    <polygon points="177.5,142 182.5,142 183.5,166 180,170 176.5,166" fill="#0f0b0d" />
     <rect x="171" y="122" width="18" height="18" fill={SKIN_D} />
     <g className={mood === 'admit' ? 'nod' : mood === 'reject' ? 'shake' : ''}>
-     <g transform="translate(180 120) scale(0.84) translate(-180 -120)">
-      <circle cx="157" cy="111" r="5" fill={SKIN_D} />
-      <circle cx="203" cy="111" r="5" fill={SKIN_D} />
-      <ellipse cx="180" cy="108" rx="25" ry="25" fill={SKIN} />
-      <ellipse cx="172" cy="90" rx="9" ry="4" fill="#fff" opacity="0.14" />
-      <Face mood={mood} />
-     </g>
+      <g transform="translate(180 120) scale(0.84) translate(-180 -120)">
+        <circle cx="157" cy="111" r="5" fill={SKIN_D} />
+        <circle cx="203" cy="111" r="5" fill={SKIN_D} />
+        <ellipse cx="180" cy="108" rx="25" ry="25" fill={SKIN} />
+        <ellipse cx="172" cy="90" rx="9" ry="4" fill="#fff" opacity="0.14" />
+        <Face mood={mood} />
+      </g>
     </g>
+    {mood !== 'reject' ? (
+      <g>
+        <path d="M143 156L198 168" stroke={ED} strokeWidth="14.5" strokeLinecap="round" />
+        <path d="M143 156L198 168" stroke={SL} strokeWidth="12" strokeLinecap="round" />
+        <path d="M217 156L162 168" stroke={ED} strokeWidth="14.5" strokeLinecap="round" />
+        <path d="M217 156L162 168" stroke={SL} strokeWidth="12" strokeLinecap="round" />
+        <circle cx="199" cy="169" r="6" fill={SKIN} />
+        <circle cx="161" cy="169" r="6" fill={SKIN} />
+      </g>
+    ) : null}
+    <circle cx="199.5" cy="112" r="2.6" fill="#0f0b0d" stroke="#cfc7b8" strokeWidth="0.8" />
+    <path d="M198 115Q205 126 199 138" stroke="#cfc7b8" strokeWidth="1.4" fill="none" strokeLinecap="round" />
     {mood === 'reject' ? <StopHand /> : null}
   </g>
 );
