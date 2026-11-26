@@ -6,6 +6,13 @@ import type { inferRouterOutputs } from '@trpc/server';
 import type { AppRouter } from '../server/trpc';
 import type { Probe } from '../shared/door';
 import { ALL_GUESTS, guestKey } from '../shared/engine';
+import {
+  ADMIT_QUIPS,
+  pickQuip,
+  REJECT_QUIPS,
+  RIGHT_QUIPS,
+  WRONG_QUIPS,
+} from '../shared/quips';
 import { MIN_PROBES, type DayResult } from '../shared/result';
 import type { Guest } from '../shared/types';
 import { DoorScene, type Phase } from './art/scene';
@@ -15,6 +22,7 @@ import { HelpModal } from './components/HelpModal';
 import { HintBar } from './components/HintBar';
 import { ProbeColumns, type HistoryItem } from './components/ProbeColumns';
 import { ResultView } from './components/ResultView';
+import { play, setSoundOn, soundOn } from './sound';
 import { trpc } from './trpc';
 import { cn } from './utils';
 
@@ -52,6 +60,9 @@ export const App = () => {
   const [exam, setExam] = useState<Exam | null>(null);
   const [result, setResult] = useState<DayResult | null>(null);
   const [verdict, setVerdict] = useState<{ correct: boolean } | null>(null);
+  const [fresh, setFresh] = useState(false);
+  const [quip, setQuip] = useState<string | null>(null);
+  const [sound, setSound] = useState(soundOn);
 
   useEffect(() => {
     let live = true;
@@ -95,9 +106,17 @@ export const App = () => {
         wait(650),
       ]);
       setPhase(res.admit ? 'admit' : 'reject');
+      play(res.admit ? 'admit' : 'reject');
+      setQuip(
+        pickQuip(
+          res.admit ? ADMIT_QUIPS : REJECT_QUIPS,
+          sent + guestKey(guest).length
+        )
+      );
       setExtra((prev) => [...prev, { guest, admit: res.admit }]);
       setLatest(key);
       await wait(950);
+      setQuip(null);
       setCycle((c) => c + 1);
     } catch {
       setNote("Couldn't reach the door. Try again.");
@@ -128,15 +147,29 @@ export const App = () => {
       const truth = res.correct ? call : !call;
       setPhase(truth ? 'admit' : 'reject');
       setVerdict({ correct: res.correct });
+      play(res.correct ? 'right' : 'wrong');
+      setQuip(
+        pickQuip(res.correct ? RIGHT_QUIPS : WRONG_QUIPS, exam.calls.length)
+      );
       await wait(1100);
       setVerdict(null);
+      setQuip(null);
       setExam((prev) =>
         prev
           ? { ...prev, calls: [...prev.calls, { call, correct: res.correct }] }
           : prev
       );
-      if (res.result) setResult(res.result);
-      else setCycle((c) => c + 1);
+      if (res.result) {
+        setFresh(true);
+        setResult(res.result);
+        play(
+          res.result.status !== 'passed'
+            ? 'fail'
+            : res.result.misses === 0
+              ? 'perfect'
+              : 'pass'
+        );
+      } else setCycle((c) => c + 1);
     } catch {
       setNote("Couldn't reach the door. Try again.");
     }
@@ -149,6 +182,7 @@ export const App = () => {
         result={result}
         doorNumber={door.number}
         subreddit={door.subreddit}
+        fresh={fresh}
       />
     );
   }
@@ -204,6 +238,44 @@ export const App = () => {
           )}
           <button
             type="button"
+            aria-label="Sound"
+            aria-pressed={sound}
+            title={sound ? 'Sound on' : 'Sound off'}
+            onClick={() => {
+              const next = !sound;
+              setSound(next);
+              setSoundOn(next);
+              if (next) play('admit');
+            }}
+            className="border-gold/60 text-gold-soft hover:bg-stage flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full border transition-colors"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" />
+              {sound ? (
+                <path
+                  d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+              ) : (
+                <path
+                  d="M16 9l5 6M21 9l-5 6"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+              )}
+            </svg>
+          </button>
+          <button
+            type="button"
             aria-label="How to play"
             onClick={() => setHelp(true)}
             className="border-gold/60 font-display text-gold-soft hover:bg-stage flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full border text-base transition-colors"
@@ -213,13 +285,25 @@ export const App = () => {
         </div>
       </header>
 
-      <DoorScene
-        phase={phase}
-        guest={exam ? examGuest : guest}
-        cycle={cycle}
-        framed
-        className="mx-auto max-h-[25vh] w-full shrink-0"
-      />
+      <div className="relative mx-auto w-full shrink-0">
+        <DoorScene
+          phase={phase}
+          guest={exam ? examGuest : guest}
+          cycle={cycle}
+          framed
+          className="mx-auto max-h-[25vh] w-full"
+        />
+        <div
+          aria-live="polite"
+          className="pointer-events-none absolute top-1 right-1"
+        >
+          {quip ? (
+            <p className="quip text-cream border-gold/50 bg-card/90 rounded-xl rounded-br-sm border px-2.5 py-1 text-[13px] shadow-lg">
+              {quip}
+            </p>
+          ) : null}
+        </div>
+      </div>
       {exam ? null : <HintBar sent={sent} />}
 
       {exam ? (
@@ -286,6 +370,14 @@ export const App = () => {
             ) : null}
           </div>
         </>
+      )}
+      {door ? null : (
+        <p
+          className="text-muted shrink-0 text-center text-[13px]"
+          role="status"
+        >
+          Opening the door\u2026
+        </p>
       )}
       {note ? (
         <p className="text-bad shrink-0 text-[12px]" role="status">

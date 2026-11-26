@@ -6,6 +6,7 @@ import {
   type DayResult,
 } from '../../shared/result';
 import { DoorScene } from '../art/scene';
+import { Confetti } from './Confetti';
 import { trpc } from '../trpc';
 import { cn } from '../utils';
 
@@ -153,7 +154,9 @@ export const ResultView = ({
   result,
   doorNumber,
   subreddit,
+  fresh = false,
 }: {
+  fresh?: boolean;
   result: DayResult;
   doorNumber: number;
   subreddit: string | null;
@@ -168,6 +171,7 @@ export const ResultView = ({
 
   return (
     <main className="mx-auto flex h-full max-w-[460px] flex-col gap-2 overflow-y-auto p-3">
+      {fresh && won && result.misses === 0 ? <Confetti /> : null}
       <header className="shrink-0 text-center">
         <p className="text-muted text-[12px]">Door #{doorNumber}</p>
         <h1

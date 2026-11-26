@@ -25,6 +25,15 @@ const Pill = ({ item, fresh }: { item: HistoryItem; fresh: boolean }) => (
         ★
       </span>
     ) : null}
+    <span
+      className={cn(
+        'text-[11px] leading-none font-bold',
+        item.admit ? 'text-good' : 'text-bad'
+      )}
+      aria-hidden="true"
+    >
+      {item.admit ? '\u2713' : '\u2715'}
+    </span>
     {ATTRS.map((attr) => (
       <PartIcon key={attr} attr={attr} id={item.guest[attr]} size={24} />
     ))}

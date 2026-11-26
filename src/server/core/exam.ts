@@ -9,6 +9,7 @@ import {
 } from '../../shared/result';
 import { rankFor, utcDayIndex } from '../../shared/streak';
 import type { Door } from './schedule';
+import { recordResult } from './stats';
 import { finishDay, loadStreak } from './streak';
 
 const callsKey = (n: number, u: string) => `exam:${n}:${u}`;
@@ -96,5 +97,10 @@ export const finishExam = async (args: {
     rank: rankFor(streak.count)?.name ?? null,
   };
   await redis.set(resultKey(door.number, userId), JSON.stringify(result));
+  try {
+    await recordResult(door.number, { passed: status === 'passed', probes });
+  } catch (error) {
+    console.error(`stats failed: ${error}`);
+  }
   return result;
 };

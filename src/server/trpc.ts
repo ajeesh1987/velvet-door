@@ -20,6 +20,7 @@ import { MIN_PROBES, examStatus } from '../shared/result';
 import { shareText } from '../shared/share';
 import { currentStreak, rankFor } from '../shared/streak';
 import { loadStreak } from './core/streak';
+import { loadStats } from './core/stats';
 import { reddit, redis } from '@devvit/web/server';
 import type { Guest } from '../shared/types';
 
@@ -77,6 +78,7 @@ export const appRouter = t.router({
       const starters = startersFor(door.entry.id);
       const { userId } = context;
       // Four independent reads: run them together, not one after another.
+      const stats = loadStats(door.number);
       const [probes, result, calls, streakState] = userId
         ? await Promise.all([
             loadProbes(door.number, userId),
@@ -85,12 +87,14 @@ export const appRouter = t.router({
             loadStreak(userId),
           ])
         : [[], null, null, null];
+      const crowd = await stats;
       const streakDays = streakState
         ? currentStreak(streakState, utcDayIndex())
         : 0;
       return {
         streak: { count: streakDays, rank: rankFor(streakDays)?.name ?? null },
         subreddit: context.subredditName ?? null,
+        crowd: { players: crowd.players, cracked: crowd.cracked },
         exam: result ? null : examView(door, calls),
         result,
         number: door.number,

@@ -1,6 +1,8 @@
 import { context, reddit, redis } from '@devvit/web/server';
 import { utcDayIndex } from '../../shared/streak';
+import { recapText } from '../../shared/recap';
 import { doorForDay } from './schedule';
+import { loadStats } from './stats';
 
 const FLAIR_TEXT = 'Daily Puzzle';
 const dailyKey = (n: number) => `daily:post:${n}`;
@@ -25,6 +27,33 @@ const ensureFlairId = async (
   } catch (error) {
     console.error(`flair setup failed: ${error}`);
     return undefined;
+  }
+};
+
+/** Yesterday's answer and numbers, as a pinned comment under today's post. */
+const postRecap = async (post: { id: `t3_${string}` }): Promise<void> => {
+  const today = utcDayIndex();
+  const { number } = doorForDay(today);
+  if (number <= 1) return;
+  try {
+    const key = `daily:recap:${number}`;
+    if (await redis.get(key)) return;
+    const yesterday = doorForDay(today - 1);
+    const text = recapText({
+      doorNumber: yesterday.number,
+      answer: yesterday.entry.answer,
+      stats: await loadStats(yesterday.number),
+    });
+    if (!text) return;
+    const comment = await reddit.submitComment({ id: post.id, text });
+    await redis.set(key, comment.id);
+    try {
+      await comment.distinguish(true);
+    } catch (error) {
+      console.error(`recap pin failed: ${error}`);
+    }
+  } catch (error) {
+    console.error(`recap failed: ${error}`);
   }
 };
 
@@ -69,6 +98,12 @@ export const createPost = async () => {
   } catch (error) {
     console.error(`pinning failed: ${error}`);
   }
+  try {
+    await post.approve();
+  } catch (error) {
+    console.error(`approve skipped: ${error}`);
+  }
+  await postRecap(post);
   return post;
 };
 
