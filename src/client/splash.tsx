@@ -5,6 +5,7 @@ import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import type { inferRouterOutputs } from '@trpc/server';
 import type { AppRouter } from '../server/trpc';
+import { AUTHOR } from '../shared/credits';
 import { DoorScene } from './art/scene';
 import { DecoFrame } from './components/DecoFrame';
 import { trpc } from './trpc';
@@ -97,6 +98,7 @@ export const Splash = () => {
                 ? `${played} guests sent today`
                 : "Crack the bouncer's secret rule"}
           </p>
+          <p className="text-muted/70 text-[11px]">by u/{AUTHOR}</p>
         </div>
       </div>
     </div>

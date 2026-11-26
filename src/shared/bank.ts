@@ -81,6 +81,44 @@ export const BANK: BankEntry[] = [
     answer: 'Blue beanies only.',
   },
 
+  // More tier 1 rules. Their ids sort after the doors already played.
+  {
+    id: 't1-top-blazer',
+    tier: 1,
+    rule: is('top', 'blazer'),
+    answer: 'Red blazers only.',
+  },
+  {
+    id: 't1-top-poncho',
+    tier: 1,
+    rule: is('top', 'poncho'),
+    answer: 'Teal ponchos only.',
+  },
+  {
+    id: 't1-top-pointy',
+    tier: 1,
+    rule: trait('top', 'pointy'),
+    answer: 'Pointy tops only.',
+  },
+  {
+    id: 't1-only-lantern',
+    tier: 1,
+    rule: is('item', 'lantern'),
+    answer: 'Lanterns only.',
+  },
+  {
+    id: 't1-snowglobe-out',
+    tier: 1,
+    rule: not(is('item', 'snowglobe')),
+    answer: 'Anything but a snow globe.',
+  },
+  {
+    id: 't1-shoes-cool',
+    tier: 1,
+    rule: trait('footwear', 'cool'),
+    answer: 'Cool-colored footwear only.',
+  },
+
   // Tier 2: two attributes
   {
     id: 't2-warm-hat-round-top',
