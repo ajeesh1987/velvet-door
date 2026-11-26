@@ -76,10 +76,15 @@ export const appRouter = t.router({
       const door = doorForDay(day);
       const starters = startersFor(door.entry.id);
       const { userId } = context;
-      const probes = userId ? await loadProbes(door.number, userId) : [];
-      const result = userId ? await loadResult(door.number, userId) : null;
-      const calls = userId ? await loadCalls(door.number, userId) : null;
-      const streakState = userId ? await loadStreak(userId) : null;
+      // Four independent reads: run them together, not one after another.
+      const [probes, result, calls, streakState] = userId
+        ? await Promise.all([
+            loadProbes(door.number, userId),
+            loadResult(door.number, userId),
+            loadCalls(door.number, userId),
+            loadStreak(userId),
+          ])
+        : [[], null, null, null];
       const streakDays = streakState
         ? currentStreak(streakState, utcDayIndex())
         : 0;

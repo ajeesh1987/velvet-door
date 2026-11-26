@@ -9,12 +9,22 @@ export type HistoryItem = Probe & { starter: boolean };
 const Pill = ({ item, fresh }: { item: HistoryItem; fresh: boolean }) => (
   <li
     className={cn(
-      'flex items-center justify-center gap-1 rounded-full border-2 bg-panel px-2 py-0.5',
+      'bg-panel flex items-center justify-center gap-1 rounded-full border-2 px-2 py-0.5',
       item.admit ? 'border-good' : 'border-bad',
+      item.starter && 'border-dashed',
       fresh && 'pill-new'
     )}
-    aria-label={item.admit ? 'Let in' : 'Turned away'}
+    aria-label={`${item.starter ? 'Starter guest: ' : ''}${item.admit ? 'let in' : 'turned away'}`}
+    title={item.starter ? 'Already on the list at the start' : undefined}
   >
+    {item.starter ? (
+      <span
+        className="text-gold-soft text-[11px] leading-none"
+        aria-hidden="true"
+      >
+        ★
+      </span>
+    ) : null}
     {ATTRS.map((attr) => (
       <PartIcon key={attr} attr={attr} id={item.guest[attr]} size={24} />
     ))}
@@ -40,7 +50,7 @@ export const ProbeColumns = ({
         return (
           <section key={col.title} className="flex min-h-0 flex-col gap-1">
             <h2 className={cn('text-[12px] font-medium', col.tone)}>
-              {col.title} ({rows.length})
+              {col.title} ({rows.filter((r) => !r.starter).length})
             </h2>
             <ul className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto pr-0.5">
               {rows.map((item) => (
