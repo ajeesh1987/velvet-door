@@ -115,13 +115,48 @@ const SharePanel = ({ onActive }: { onActive: (on: boolean) => void }) => {
   );
 };
 
+/** A quiet, optional next step: join the community for tomorrow's door. */
+const JoinButton = ({ subreddit }: { subreddit: string }) => {
+  const [step, setStep] = useState<'idle' | 'busy' | 'done' | 'error'>('idle');
+  const join = async () => {
+    setStep('busy');
+    try {
+      await trpc.door.subscribe.mutate();
+      setStep('done');
+    } catch {
+      setStep('error');
+    }
+  };
+  if (step === 'done') {
+    return (
+      <p className="text-good shrink-0 text-center text-[13px]" role="status">
+        You&apos;re on the list. See you tomorrow.
+      </p>
+    );
+  }
+  return (
+    <button
+      type="button"
+      disabled={step === 'busy'}
+      onClick={() => void join()}
+      className="text-gold-soft shrink-0 cursor-pointer text-center text-[13px] underline underline-offset-2 disabled:opacity-60"
+    >
+      {step === 'error'
+        ? "Couldn't join. Try again?"
+        : `Join r/${subreddit} for tomorrow's door`}
+    </button>
+  );
+};
+
 /** The end of the day: grade, bouncer quote, the rule, streak, next door. */
 export const ResultView = ({
   result,
   doorNumber,
+  subreddit,
 }: {
   result: DayResult;
   doorNumber: number;
+  subreddit: string | null;
 }) => {
   const won = result.status === 'passed';
   const [sharing, setSharing] = useState(false);
@@ -185,6 +220,7 @@ export const ResultView = ({
         </>
       )}
       <SharePanel onActive={setSharing} />
+      {sharing || !subreddit ? null : <JoinButton subreddit={subreddit} />}
       <p className="text-muted shrink-0 pb-1 text-center text-[12px]">
         Next door opens in {formatCountdown(left)}
       </p>

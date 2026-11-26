@@ -2,6 +2,7 @@ import { expect } from 'vitest';
 import { context } from '@devvit/web/server';
 import { test } from './test';
 import { appRouter } from './trpc';
+import { HINT_AFTER } from '../shared/hint';
 import { MIN_PROBES } from '../shared/result';
 import { ALL_GUESTS } from '../shared/engine';
 
@@ -44,4 +45,18 @@ test('a full exam ends with a saved result, and cannot be replayed', async () =>
 
 test('sharing is refused before the day is finished', async () => {
   await expect(caller().door.sharePreview()).rejects.toThrow();
+});
+
+test('hints unlock after six guests and never name the rule', async () => {
+  const api = caller();
+  await expect(api.door.hint()).rejects.toThrow();
+  for (const g of ALL_GUESTS) {
+    const today = await api.door.today();
+    if (today.probes.length >= HINT_AFTER) break;
+    await api.door.probe(g);
+  }
+  const { text } = await api.door.hint();
+  expect(text.startsWith('Hint:')).toBe(true);
+  const today = await api.door.today();
+  expect(today.streak.count).toBe(0);
 });

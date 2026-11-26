@@ -40,7 +40,7 @@ export const Splash = () => {
     <div className="bg-card relative box-border h-screen min-h-[270px] px-6 pt-4 pb-4">
       <DecoFrame />
       <div className="relative flex h-full flex-col">
-        <div className="grid grid-cols-[64px_1fr_64px] items-start">
+        <div className="grid grid-cols-[76px_1fr_76px] items-start">
           <span
             className={cn(
               'w-fit rounded-full border px-2.5 py-px text-[12px] font-medium capitalize shadow-[0_0_8px_currentColor]',
@@ -61,7 +61,11 @@ export const Splash = () => {
                 : ' '}
             </p>
           </div>
-          <span />
+          <span className="text-gold-soft text-right text-[12px] leading-tight">
+            {door && door.streak.count > 0
+              ? `${door.streak.count}-day streak`
+              : ''}
+          </span>
         </div>
         <div className="min-h-0 flex-1 py-1">
           <DoorScene
@@ -91,7 +95,7 @@ export const Splash = () => {
                 : 'Come back tomorrow'
               : played > 0
                 ? `${played} guests sent today`
-                : 'Crack the secret rule'}
+                : "Crack the bouncer's secret rule"}
           </p>
         </div>
       </div>

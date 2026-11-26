@@ -15,8 +15,11 @@ import {
   loadResult,
   saveCalls,
 } from './core/exam';
+import { HINT_AFTER, hintFor, hintText } from '../shared/hint';
 import { MIN_PROBES, examStatus } from '../shared/result';
 import { shareText } from '../shared/share';
+import { currentStreak, rankFor } from '../shared/streak';
+import { loadStreak } from './core/streak';
 import { reddit, redis } from '@devvit/web/server';
 import type { Guest } from '../shared/types';
 
@@ -76,7 +79,13 @@ export const appRouter = t.router({
       const probes = userId ? await loadProbes(door.number, userId) : [];
       const result = userId ? await loadResult(door.number, userId) : null;
       const calls = userId ? await loadCalls(door.number, userId) : null;
+      const streakState = userId ? await loadStreak(userId) : null;
+      const streakDays = streakState
+        ? currentStreak(streakState, utcDayIndex())
+        : 0;
       return {
+        streak: { count: streakDays, rank: rankFor(streakDays)?.name ?? null },
+        subreddit: context.subredditName ?? null,
         exam: result ? null : examView(door, calls),
         result,
         number: door.number,
@@ -110,6 +119,21 @@ export const appRouter = t.router({
         ]);
       }
       return { admit, duplicate: false as const };
+    }),
+    hint: publicProcedure.query(async () => {
+      const { userId } = context;
+      if (!userId) throw new TRPCError({ code: 'UNAUTHORIZED' });
+      const door = doorForDay(utcDayIndex());
+      const probes = await loadProbes(door.number, userId);
+      if (probes.length < HINT_AFTER) {
+        throw new TRPCError({ code: 'BAD_REQUEST', message: 'too early' });
+      }
+      const { attr, total } = hintFor(door.entry.rule, door.number);
+      return { text: hintText(attr, total) };
+    }),
+    subscribe: publicProcedure.mutation(async () => {
+      await reddit.subscribeToCurrentSubreddit();
+      return { joined: true as const };
     }),
     sharePreview: publicProcedure.query(async () => {
       const { userId } = context;

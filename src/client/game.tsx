@@ -12,6 +12,7 @@ import { DoorScene, type Phase } from './art/scene';
 import { ExamPanel } from './components/ExamPanel';
 import { GuestBuilder } from './components/GuestBuilder';
 import { HelpModal } from './components/HelpModal';
+import { HintBar } from './components/HintBar';
 import { ProbeColumns, type HistoryItem } from './components/ProbeColumns';
 import { ResultView } from './components/ResultView';
 import { trpc } from './trpc';
@@ -61,7 +62,6 @@ export const App = () => {
         setDoor(d);
         setExam(d.exam);
         setResult(d.result);
-        if (d.probes.length === 0) setHelp(true);
       })
       .catch(() => {
         if (live) setFailed(true);
@@ -144,7 +144,13 @@ export const App = () => {
   };
 
   if (result && door) {
-    return <ResultView result={result} doorNumber={door.number} />;
+    return (
+      <ResultView
+        result={result}
+        doorNumber={door.number}
+        subreddit={door.subreddit}
+      />
+    );
   }
 
   const examGuest = exam ? (exam.guests[exam.calls.length] ?? null) : null;
@@ -212,8 +218,9 @@ export const App = () => {
         guest={exam ? examGuest : guest}
         cycle={cycle}
         framed
-        className="mx-auto max-h-[28vh] w-full shrink-0"
+        className="mx-auto max-h-[25vh] w-full shrink-0"
       />
+      {exam ? null : <HintBar sent={sent} />}
 
       {exam ? (
         <ExamPanel
